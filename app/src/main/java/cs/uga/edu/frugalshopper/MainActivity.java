@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.IOError;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String DEBUG_TAG = "FrugalShopper";
@@ -47,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-
-        System.out.println("IN ONCREATE()");
         // set views for input
         textViewPriceA = (TextView) findViewById(R.id.priceA);
         textViewPriceB = (TextView) findViewById(R.id.priceB);
@@ -94,43 +95,128 @@ public class MainActivity extends AppCompatActivity {
     private class ButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            // read input values
-            // read prices
-            getPriceA = ParseDouble(textViewPriceA.getText().toString());
-            getPriceB = ParseDouble(textViewPriceB.getText().toString());
-            getPriceC = ParseDouble(textViewPriceC.getText().toString());
+            /* Read input values entered by the user. User can enter in any sequence. Compute the unit
+            * prices to find out the minimum and display on top in the text view */
 
-            // read weights in pounds
-            getWtPoundA = (int) ParseInt(textViewWtPoundA.getText().toString());
-            getWtPoundB = (int) ParseInt(textViewWtPoundB.getText().toString());
-            getWtPoundC = (int) ParseInt(textViewWtPoundC.getText().toString());
+            try {
 
-            // read weights in Oz
-            getWtOzA = (int) ParseInt(textViewWtOzA.getText().toString());
-            getWtOzB = (int) ParseInt(textViewWtOzB.getText().toString());
-            getWtOzC = (int) ParseInt(textViewWtOzC.getText().toString());
+                if((!textViewPriceA.getText().equals(null)) && (!textViewWtPoundA.getText().equals(null))
+                        && (!textViewWtOzA.getText().equals(null)) ){
+                    // read Item A
+                    getPriceA = ParseDouble(textViewPriceA.getText().toString());
+                    getWtPoundA = (int) ParseInt(textViewWtPoundA.getText().toString());
+                    getWtOzA = (int) ParseInt(textViewWtOzA.getText().toString());
 
-            // calculate unit prices for each item respectively
-            unitPriceA = (getPriceA / ((getWtPoundA * 16) + getWtOzA));
-            unitPriceB = (getPriceB / ((getWtPoundB * 16) + getWtOzB));
-            unitPriceC = (getPriceC / ((getWtPoundC * 16) + getWtOzC));
-
-            System.out.println(unitPriceA);
-            System.out.println(unitPriceB);
-            System.out.println(unitPriceC);
-
-            if(unitPriceA < unitPriceB) {
-                if(unitPriceA < unitPriceC){
-                    frugalBuyOutput.setText("A");
-                } else {
-                    frugalBuyOutput.setText("C");
+                    // calculate unit prices for each item respectively
+                    try {
+                        unitPriceA = (getPriceA / ((getWtPoundA * 16) + getWtOzA));
+                    } catch(ArithmeticException ae){
+                        unitPriceA = 0.0;
+                    }
                 }
-            } else {
-                if(unitPriceB < unitPriceC){
-                    frugalBuyOutput.setText("B");
-                } else {
-                    frugalBuyOutput.setText("C");
+
+                if((!textViewPriceB.getText().equals(null)) && (!textViewWtPoundB.getText().equals(null))
+                        && (!textViewWtOzB.getText().equals(null)) ) {
+                    // read Item B
+                    getPriceB = ParseDouble(textViewPriceB.getText().toString());
+                    getWtPoundB = (int) ParseInt(textViewWtPoundB.getText().toString());
+                    getWtOzB = (int) ParseInt(textViewWtOzB.getText().toString());
+
+                    // calculate unit prices for each item respectively
+                    try {
+                        unitPriceB = (getPriceB / ((getWtPoundB * 16) + getWtOzB));
+                    } catch (ArithmeticException ae){
+                        unitPriceB = 0.0;
+                    }
                 }
+
+                if((!textViewPriceC.getText().equals(null)) && (!textViewWtPoundC.getText().equals(null))
+                        && (!textViewWtOzC.getText().equals(null)) ) {
+                    // read Item C
+                    getPriceC = ParseDouble(textViewPriceC.getText().toString());
+                    getWtPoundC = (int) ParseInt(textViewWtPoundC.getText().toString());
+                    getWtOzC = (int) ParseInt(textViewWtOzC.getText().toString());
+
+                    // calculate unit prices for each item respectively
+                    try {
+                        unitPriceC = (getPriceC / ((getWtPoundC * 16) + getWtOzC));
+                    } catch (ArithmeticException ae){
+                        unitPriceC = 0.0;
+                    }
+                }
+
+                // display the desired result
+                if(unitPriceA < unitPriceB) {
+                    if(unitPriceA < unitPriceC){
+                        if(unitPriceA != 0.0 && unitPriceA != Double.POSITIVE_INFINITY) {
+                            frugalBuyOutput.setText("A");
+                        }
+                    } else {
+                        if(unitPriceC != 0.0 && unitPriceA != Double.POSITIVE_INFINITY) {
+                            frugalBuyOutput.setText("C");
+                        }
+                    }
+                } else {
+                    if(unitPriceB < unitPriceC){
+                        if(unitPriceB != 0.0 && unitPriceA != Double.POSITIVE_INFINITY) {
+                            frugalBuyOutput.setText("B");
+                        }
+                    } else {
+                        if(unitPriceC != 0.0 && unitPriceA != Double.POSITIVE_INFINITY) {
+                            frugalBuyOutput.setText("C");
+                        }
+                    }
+                }
+            } catch (NumberFormatException nfe) {
+                Log.i(DEBUG_TAG,"Incorrect Number Format for inputs provided by the user");
+                // set everything to zeros and display Incorrect format in frugalBuyOutput textView
+                textViewPriceA.setText(null);
+                textViewPriceB.setText(null);
+                textViewPriceC.setText(null);
+
+                textViewWtOzA.setText(null);
+                textViewWtOzB.setText(null);
+                textViewWtOzC.setText(null);
+
+                textViewWtPoundA.setText(null);
+                textViewWtPoundB.setText(null);
+                textViewWtPoundC.setText(null);
+
+                frugalBuyOutput.setText("Incorrect Data Format");
+            } catch (IOError ioe){
+                Log.i(DEBUG_TAG,"Incorrect Number Format for inputs provided by the user");
+
+                // set everything to zeros and display Incorrect format in frugalBuyOutput textView
+                textViewPriceA.setText(null);
+                textViewPriceB.setText(null);
+                textViewPriceC.setText(null);
+
+                textViewWtOzA.setText(null);
+                textViewWtOzB.setText(null);
+                textViewWtOzC.setText(null);
+
+                textViewWtPoundA.setText(null);
+                textViewWtPoundB.setText(null);
+                textViewWtPoundC.setText(null);
+
+                frugalBuyOutput.setText("Incorrect Data Format");
+            } catch (Exception e) {
+                Log.i(DEBUG_TAG,"Incorrect Number Format for inputs provided by the user");
+
+                // set everything to zeros and display Incorrect format in frugalBuyOutput textView
+                textViewPriceA.setText(null);
+                textViewPriceB.setText(null);
+                textViewPriceC.setText(null);
+
+                textViewWtOzA.setText(null);
+                textViewWtOzB.setText(null);
+                textViewWtOzC.setText(null);
+
+                textViewWtPoundA.setText(null);
+                textViewWtPoundB.setText(null);
+                textViewWtPoundC.setText(null);
+
+                frugalBuyOutput.setText("Something went Wrong!");
             }
         }
     }
