@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.io.IOError;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private double unitPriceA = 0.0;
     private double unitPriceB = 0.0;
     private double unitPriceC = 0.0;
+    private DecimalFormat formatNumber = new DecimalFormat("$#0.00");
 
     private TextView textViewPriceA;
     private TextView textViewPriceB;
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewWtOzB;
     private TextView textViewWtOzC;
 
+    private TextView textViewUnitPriceLabelA;
+    private TextView textViewUnitPriceLabelB;
+    private TextView textViewUnitPriceLabelC;
 
     private TextView frugalBuyOutput;
     private Button calculateFrugalBuy;
@@ -62,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
         textViewWtOzA = (TextView) findViewById(R.id.wtOzA);
         textViewWtOzB = (TextView) findViewById(R.id.wtOzB);
         textViewWtOzC = (TextView) findViewById(R.id.wtOzC);
+
+        textViewUnitPriceLabelA = (TextView) findViewById(R.id.unitPriceLabelA);
+        textViewUnitPriceLabelB = (TextView) findViewById(R.id.unitPriceLabelB);
+        textViewUnitPriceLabelC = (TextView) findViewById(R.id.unitPriceLabelC);
 
         // set views for output
         frugalBuyOutput = (TextView) findViewById(R.id.frugalBuy);
@@ -113,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
                     } catch(ArithmeticException ae){
                         unitPriceA = 0.0;
                     }
+                    // set unit price to display to User
+                    textViewUnitPriceLabelA.setText(formatNumber.format(unitPriceA));
                 }
 
                 if((!textViewPriceB.getText().equals(null)) && (!textViewWtPoundB.getText().equals(null))
@@ -128,6 +139,8 @@ public class MainActivity extends AppCompatActivity {
                     } catch (ArithmeticException ae){
                         unitPriceB = 0.0;
                     }
+                    // set unit price to display to User
+                    textViewUnitPriceLabelB.setText(formatNumber.format(unitPriceB));
                 }
 
                 if((!textViewPriceC.getText().equals(null)) && (!textViewWtPoundC.getText().equals(null))
@@ -143,6 +156,8 @@ public class MainActivity extends AppCompatActivity {
                     } catch (ArithmeticException ae){
                         unitPriceC = 0.0;
                     }
+                    // set unit price to display to User
+                    textViewUnitPriceLabelC.setText(formatNumber.format(unitPriceC));
                 }
 
                 // display the desired result

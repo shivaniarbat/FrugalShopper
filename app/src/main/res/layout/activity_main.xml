@@ -6,220 +6,364 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/priceA"
-        android:layout_width="107dp"
-        android:layout_height="57dp"
-        android:contentDescription="Price for Product A"
-        android:ems="10"
-        android:hint="$ 00.00"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintEnd_toStartOf="@+id/wtPoundA"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+    <LinearLayout
+        android:id="@+id/linearScreenLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/priceB"
-        android:layout_width="107dp"
-        android:layout_height="55dp"
-        android:contentDescription="Price for Product A"
-        android:ems="10"
-        android:hint="$ 00.00"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/textView9"
-        app:layout_constraintEnd_toStartOf="@+id/wtPoundB"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        <!-- Top Layout for Frugal Label and Output -->
+        <LinearLayout
+            android:id="@+id/linearLayoutTop"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="8dp">
 
-    <EditText
-        android:id="@+id/priceC"
-        android:layout_width="107dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="120dp"
-        android:contentDescription="Price for Product A"
-        android:ems="10"
-        android:hint="$ 00.00"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/wtPoundC"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+            <TextView
+                android:id="@+id/frugalBuyLabel"
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="Frugal Buy : "
+                tools:layout_editor_absoluteX="91dp"
+                tools:layout_editor_absoluteY="33dp" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="17dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginLeft="42dp"
-        android:layout_marginEnd="287dp"
-        android:layout_marginRight="287dp"
-        android:text="Enter Price A"
-        app:layout_constraintBottom_toTopOf="@+id/priceA"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+            <TextView
+                android:id="@+id/frugalBuy"
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="A/B/C"
+                tools:layout_editor_absoluteX="264dp"
+                tools:layout_editor_absoluteY="33dp" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="21dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginLeft="42dp"
-        android:layout_marginEnd="287dp"
-        android:layout_marginRight="287dp"
-        android:text="Enter Price B"
-        app:layout_constraintBottom_toTopOf="@+id/priceB"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceA" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginLeft="42dp"
-        android:layout_marginEnd="287dp"
-        android:layout_marginRight="287dp"
-        android:text="Enter Price C"
-        app:layout_constraintBottom_toTopOf="@+id/priceC"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceB" />
+        <!-- Layout for Price Label A -->
+        <LinearLayout
+            android:id="@+id/linearLayoutLabelForA"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="11dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="33dp">
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="119dp"
-        android:layout_height="24dp"
-        android:layout_marginBottom="8dp"
-        android:text="Frugal Buy : "
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintEnd_toStartOf="@+id/frugalBuy"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.004" />
+            <TextView
+                android:id="@+id/enterPriceLabelA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="Enter Price A"
+                tools:layout_editor_absoluteX="42dp"
+                tools:layout_editor_absoluteY="81dp" />
 
-    <EditText
-        android:id="@+id/wtPoundA"
-        android:layout_width="71dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="70dp"
-        android:ems="10"
-        android:hint="pounds"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/wtPoundB"
-        app:layout_constraintEnd_toStartOf="@+id/wtOzA"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/priceA"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.51" />
+            <TextView
+                android:id="@+id/enterWeightLabelA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="50dp"
+                android:text="Enter Weight"
+                tools:layout_editor_absoluteX="42dp"
+                tools:layout_editor_absoluteY="81dp" />
 
-    <EditText
-        android:id="@+id/wtPoundB"
-        android:layout_width="71dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="pounds"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/wtPoundC"
-        app:layout_constraintEnd_toStartOf="@+id/wtOzB"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/priceB"
-        app:layout_constraintTop_toBottomOf="@+id/wtPoundA" />
+            <TextView
+                android:id="@+id/calculateUnitPriceA"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="50dp"
+                android:ems="10"
+                android:gravity="center"
+                android:text="Calculated Unit Price A"
+                tools:layout_editor_absoluteX="42dp"
+                tools:layout_editor_absoluteY="81dp" />
 
-    <EditText
-        android:id="@+id/wtPoundC"
-        android:layout_width="71dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="pounds"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/calculateFrugalBuyButton"
-        app:layout_constraintEnd_toStartOf="@+id/wtOzC"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/priceC"
-        app:layout_constraintTop_toBottomOf="@+id/wtPoundB" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/frugalBuy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="A/B/C"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.056" />
+        <!-- Layout for Product A info -->
+        <LinearLayout
+            android:id="@+id/linearLayoutInfoProductA"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="11dp"
+            tools:layout_editor_absoluteX="11dp"
+            tools:layout_editor_absoluteY="102dp">
 
-    <EditText
-        android:id="@+id/wtOzA"
-        android:layout_width="62dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="70dp"
-        android:ems="10"
-        android:hint="oz"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/wtOzB"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/wtPoundA"
-        app:layout_constraintTop_toTopOf="parent" />
+            <EditText
+                android:id="@+id/priceA"
+                android:layout_width="107dp"
+                android:layout_height="57dp"
+                android:contentDescription="Price for Product A"
+                android:ems="10"
+                android:hint="$ 00.00"
+                android:inputType="numberDecimal"
+                tools:layout_editor_absoluteX="39dp"
+                tools:layout_editor_absoluteY="127dp" />
 
-    <EditText
-        android:id="@+id/wtOzB"
-        android:layout_width="62dp"
-        android:layout_height="42dp"
-        android:contentDescription="oz"
-        android:ems="10"
-        android:hint="oz"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/wtOzC"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/wtPoundB"
-        app:layout_constraintTop_toBottomOf="@+id/wtOzA" />
+            <EditText
+                android:id="@+id/wtPoundA"
+                android:layout_width="76dp"
+                android:layout_height="57dp"
+                android:ems="10"
+                android:hint="pounds"
+                android:inputType="numberDecimal"
+                tools:layout_editor_absoluteX="188dp"
+                tools:layout_editor_absoluteY="127dp" />
 
-    <EditText
-        android:id="@+id/wtOzC"
-        android:layout_width="62dp"
-        android:layout_height="42dp"
-        android:layout_marginBottom="64dp"
-        android:ems="10"
-        android:hint="oz"
-        android:inputType="textPersonName|numberDecimal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/wtPoundC"
-        app:layout_constraintTop_toBottomOf="@+id/wtOzB"
-        app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/calculateFrugalBuyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Click Me to Find Best Buy"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.966" />
+            <EditText
+                android:id="@+id/wtOzA"
+                android:layout_width="76dp"
+                android:layout_height="57dp"
+                android:ems="10"
+                android:hint="oz"
+                android:inputType="numberDecimal"
+                tools:layout_editor_absoluteX="301dp"
+                tools:layout_editor_absoluteY="127dp" />
 
+
+            <TextView
+                android:id="@+id/unitPriceLabelA"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="$ 00.00"
+                tools:layout_editor_absoluteX="301dp"
+                tools:layout_editor_absoluteY="127dp" />
+
+        </LinearLayout>
+
+        <!-- Layout for Price Label B -->
+
+        <LinearLayout
+            android:id="@+id/linearLayoutLabelForB"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="11dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="33dp">
+
+            <TextView
+                android:id="@+id/enterPriceLabelB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="Enter Price B"
+                tools:layout_editor_absoluteX="42dp"
+                tools:layout_editor_absoluteY="81dp" />
+
+            <TextView
+                android:id="@+id/enterWeightLabelB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="50dp"
+                android:text="Enter Weight"
+                tools:layout_editor_absoluteX="42dp"
+                tools:layout_editor_absoluteY="81dp" />
+
+            <TextView
+                android:id="@+id/calculateUnitPriceB"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="50dp"
+                android:ems="10"
+                android:gravity="center"
+                android:text="Calculated Unit Price B"
+                tools:layout_editor_absoluteX="42dp"
+                tools:layout_editor_absoluteY="81dp" />
+
+        </LinearLayout>
+
+        <!-- Layout for Product B info -->
+
+        <LinearLayout
+            android:id="@+id/linearLayoutInfoProductB"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="11dp"
+            tools:layout_editor_absoluteX="11dp"
+            tools:layout_editor_absoluteY="102dp">
+
+            <EditText
+                android:id="@+id/priceB"
+                android:layout_width="107dp"
+                android:layout_height="57dp"
+                android:contentDescription="Price for Product B"
+                android:ems="10"
+                android:hint="$ 00.00"
+                android:inputType="numberDecimal"
+                tools:layout_editor_absoluteX="39dp"
+                tools:layout_editor_absoluteY="127dp" />
+
+            <EditText
+                android:id="@+id/wtPoundB"
+                android:layout_width="76dp"
+                android:layout_height="57dp"
+                android:ems="10"
+                android:hint="pounds"
+                android:inputType="numberDecimal"
+                tools:layout_editor_absoluteX="188dp"
+                tools:layout_editor_absoluteY="127dp" />
+
+
+            <EditText
+                android:id="@+id/wtOzB"
+                android:layout_width="76dp"
+                android:layout_height="57dp"
+                android:ems="10"
+                android:hint="oz"
+                android:inputType="numberDecimal"
+                tools:layout_editor_absoluteX="301dp"
+                tools:layout_editor_absoluteY="127dp" />
+
+
+            <TextView
+                android:id="@+id/unitPriceLabelB"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="$ 00.00"
+                tools:layout_editor_absoluteX="301dp"
+                tools:layout_editor_absoluteY="127dp" />
+
+        </LinearLayout>
+
+        <!-- Layout for Price Label C -->
+
+        <LinearLayout
+            android:id="@+id/linearLayoutLabelForC"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="11dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="33dp">
+
+            <TextView
+                android:id="@+id/enterPriceLabelC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="Enter Price B"
+                tools:layout_editor_absoluteX="42dp"
+                tools:layout_editor_absoluteY="81dp" />
+
+            <TextView
+                android:id="@+id/enterWeightLabelC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="50dp"
+                android:text="Enter Weight"
+                tools:layout_editor_absoluteX="42dp"
+                tools:layout_editor_absoluteY="81dp" />
+
+            <TextView
+                android:id="@+id/calculateUnitPriceC"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="50dp"
+                android:ems="10"
+                android:gravity="center"
+                android:text="Calculated Unit Price C"
+                tools:layout_editor_absoluteX="42dp"
+                tools:layout_editor_absoluteY="81dp" />
+
+        </LinearLayout>
+
+        <!-- Layout for Product C info -->
+
+        <LinearLayout
+            android:id="@+id/linearLayoutInfoProductC"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="11dp"
+            tools:layout_editor_absoluteX="11dp"
+            tools:layout_editor_absoluteY="102dp">
+
+            <EditText
+                android:id="@+id/priceC"
+                android:layout_width="107dp"
+                android:layout_height="57dp"
+                android:contentDescription="Price for Product C"
+                android:ems="10"
+                android:hint="$ 00.00"
+                android:inputType="numberDecimal"
+                tools:layout_editor_absoluteX="39dp"
+                tools:layout_editor_absoluteY="127dp" />
+
+            <EditText
+                android:id="@+id/wtPoundC"
+                android:layout_width="76dp"
+                android:layout_height="57dp"
+                android:ems="10"
+                android:hint="pounds"
+                android:inputType="numberDecimal"
+                tools:layout_editor_absoluteX="188dp"
+                tools:layout_editor_absoluteY="127dp" />
+
+
+            <EditText
+                android:id="@+id/wtOzC"
+                android:layout_width="76dp"
+                android:layout_height="57dp"
+                android:ems="10"
+                android:hint="oz"
+                android:inputType="numberDecimal"
+                tools:layout_editor_absoluteX="301dp"
+                tools:layout_editor_absoluteY="127dp" />
+
+
+            <TextView
+                android:id="@+id/unitPriceLabelC"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="$ 00.00"
+                tools:layout_editor_absoluteX="301dp"
+                tools:layout_editor_absoluteY="127dp" />
+
+        </LinearLayout>
+
+        <!-- Layout for Button -->
+
+        <LinearLayout
+            android:id="@+id/linearLayoutButton"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="11dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="33dp">
+
+            <Button
+                android:id="@+id/calculateFrugalBuyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="30dp"
+                android:text="Click Me to Find the Frugal Buy"
+                tools:layout_editor_absoluteX="42dp"
+                tools:layout_editor_absoluteY="81dp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
