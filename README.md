@@ -2,7 +2,7 @@
 Project 1 for Android Development
 
 ### In this project, simple Android app is built and created. 
-A frugal shopper at a grocery store likes to compare prices of items to be purchased. However, it is often
+  A frugal shopper at a grocery store likes to compare prices of items to be purchased. However, it is often
 the case that a few similar products are available, but they are offered in packages of different sizes and it
 is difficult to decide if a package from brand X, which contains 1 pound 2 ounces of raisin bran at $5.99 is
 a better buy than a package from brand Y for $3.49, that contains only 10 ounces of raisin bran. It would
