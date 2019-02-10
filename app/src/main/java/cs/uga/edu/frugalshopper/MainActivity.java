@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.io.IOError;
 import java.io.IOException;
+import java.sql.Array;
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -101,11 +102,42 @@ public class MainActivity extends AppCompatActivity {
         else return 0;
     }
 
+    static String findFrugalBuy(double priceA, double priceB, double priceC) {
+        String outputMessage = " ";
+        Double[] unitPrices = {priceA,priceB,priceC};
+        double min = Double.MAX_VALUE;
+        int flag = Integer.MAX_VALUE;
+
+        for(int i=0;i<unitPrices.length;i++){
+            if(min > unitPrices[i] && unitPrices[i] != 0.0){
+                min = unitPrices[i];
+                flag = i;
+            }
+        }
+
+        switch (flag){
+            case 0:
+                outputMessage = "Buy product A";
+                break;
+            case 1:
+                outputMessage = "Buy product B";
+                break;
+            case 2:
+                outputMessage = "Buy product C";
+                break;
+            default:
+                outputMessage = " ";
+        }
+
+        return outputMessage;
+    }
+
     private class ButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             /* Read input values entered by the user. User can enter in any sequence. Compute the unit
             * prices to find out the minimum and display on top in the text view */
+            frugalBuyOutput.setText(" ");
 
             try {
 
@@ -119,6 +151,9 @@ public class MainActivity extends AppCompatActivity {
                     // calculate unit prices for each item respectively
                     try {
                         unitPriceA = (getPriceA / ((getWtPoundA * 16) + getWtOzA));
+                        if (Double.isNaN(unitPriceA) || Double.isInfinite(unitPriceA)) {
+                            unitPriceA = 0.0;
+                        }
                     } catch(ArithmeticException ae){
                         unitPriceA = 0.0;
                     }
@@ -136,11 +171,15 @@ public class MainActivity extends AppCompatActivity {
                     // calculate unit prices for each item respectively
                     try {
                         unitPriceB = (getPriceB / ((getWtPoundB * 16) + getWtOzB));
+                        if (Double.isNaN(unitPriceB) || Double.isInfinite(unitPriceB)) {
+                            unitPriceB = 0.0;
+                        }
                     } catch (ArithmeticException ae){
                         unitPriceB = 0.0;
                     }
                     // set unit price to display to User
                     textViewUnitPriceLabelB.setText(formatNumber.format(unitPriceB));
+
                 }
 
                 if((!textViewPriceC.getText().equals(null)) && (!textViewWtPoundC.getText().equals(null))
@@ -153,6 +192,9 @@ public class MainActivity extends AppCompatActivity {
                     // calculate unit prices for each item respectively
                     try {
                         unitPriceC = (getPriceC / ((getWtPoundC * 16) + getWtOzC));
+                        if (Double.isNaN(unitPriceC) || Double.isInfinite(unitPriceC)) {
+                            unitPriceC = 0.0;
+                        }
                     } catch (ArithmeticException ae){
                         unitPriceC = 0.0;
                     }
@@ -161,27 +203,31 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 // display the desired result
-                if(unitPriceA < unitPriceB) {
-                    if(unitPriceA < unitPriceC){
-                        if(unitPriceA != 0.0 && unitPriceA != Double.POSITIVE_INFINITY) {
-                            frugalBuyOutput.setText("A");
-                        }
-                    } else {
-                        if(unitPriceC != 0.0 && unitPriceA != Double.POSITIVE_INFINITY) {
-                            frugalBuyOutput.setText("C");
-                        }
-                    }
-                } else {
-                    if(unitPriceB < unitPriceC){
-                        if(unitPriceB != 0.0 && unitPriceA != Double.POSITIVE_INFINITY) {
-                            frugalBuyOutput.setText("B");
-                        }
-                    } else {
-                        if(unitPriceC != 0.0 && unitPriceA != Double.POSITIVE_INFINITY) {
-                            frugalBuyOutput.setText("C");
-                        }
-                    }
-                }
+
+//                if(unitPriceA < unitPriceB && !Double.isNaN(unitPriceA) && !Double.isNaN(unitPriceB)) {
+//                    if(unitPriceA < unitPriceC){
+//                        if(unitPriceA != 0.0  && unitPriceA != Double.POSITIVE_INFINITY) {
+//                            frugalBuyOutput.setText("Buy Product A");
+//                        }
+//                    } else {
+//                        if(unitPriceC != 0.0 && unitPriceC != Double.POSITIVE_INFINITY) {
+//                            frugalBuyOutput.setText("Buy Product C");
+//                        }
+//                    }
+//                } else {
+//                    if(unitPriceB < unitPriceC && !Double.isNaN(unitPriceB) && !Double.isNaN(unitPriceC)) {
+//                        if(unitPriceB != 0.0 && unitPriceB != Double.POSITIVE_INFINITY) {
+//                            frugalBuyOutput.setText("Buy Product B");
+//                        }
+//                    } else {
+//                        if(unitPriceC != 0.0 && unitPriceC != Double.POSITIVE_INFINITY) {
+//                            frugalBuyOutput.setText("Buy Product C");
+//                        }
+//                    }
+//                }
+                // call method to determine frugal buy
+                frugalBuyOutput.setText(findFrugalBuy(unitPriceA,unitPriceB,unitPriceC));
+
             } catch (NumberFormatException nfe) {
                 Log.i(DEBUG_TAG,"Incorrect Number Format for inputs provided by the user");
                 // set everything to zeros and display Incorrect format in frugalBuyOutput textView
