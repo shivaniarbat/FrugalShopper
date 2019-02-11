@@ -6,10 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import java.io.IOError;
-import java.io.IOException;
-import java.sql.Array;
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -85,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
             try {
                 return Double.parseDouble(strNumber);
             } catch(Exception e) {
-                return -1;   // or some value to mark this field is wrong. or make a function validates field first ...
+                return -1;   // or some value to mark this field is wrong. or make a function valid-
+                // ates field at intital point
             }
         }
         else return 0;
@@ -96,13 +95,17 @@ public class MainActivity extends AppCompatActivity {
             try {
                 return Integer.parseInt(strNumber);
             } catch(Exception e) {
-                return -1;   // or some value to mark this field is wrong. or make a function validates field first ...
+                return -1;   // or some value to mark this field is wrong. or make a function valid-
+                // ates field at initial point
             }
         }
         else return 0;
     }
-
-    static String findFrugalBuy(double priceA, double priceB, double priceC) {
+    /*
+    * method - findFrugalBuy : method to find the minimum unit price. unit price which computes to
+    * zero are excluded
+    * */
+    String findFrugalBuy(double priceA, double priceB, double priceC) {
         String outputMessage = " ";
         Double[] unitPrices = {priceA,priceB,priceC};
         double min = Double.MAX_VALUE;
@@ -127,6 +130,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
             default:
                 outputMessage = " ";
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Enter values and try again ! !",
+                        Toast.LENGTH_SHORT);
+
+                toast.show();
         }
 
         return outputMessage;
@@ -137,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             /* Read input values entered by the user. User can enter in any sequence. Compute the unit
             * prices to find out the minimum and display on top in the text view */
+
             frugalBuyOutput.setText(" ");
 
             try {
@@ -203,30 +212,9 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 // display the desired result
-
-//                if(unitPriceA < unitPriceB && !Double.isNaN(unitPriceA) && !Double.isNaN(unitPriceB)) {
-//                    if(unitPriceA < unitPriceC){
-//                        if(unitPriceA != 0.0  && unitPriceA != Double.POSITIVE_INFINITY) {
-//                            frugalBuyOutput.setText("Buy Product A");
-//                        }
-//                    } else {
-//                        if(unitPriceC != 0.0 && unitPriceC != Double.POSITIVE_INFINITY) {
-//                            frugalBuyOutput.setText("Buy Product C");
-//                        }
-//                    }
-//                } else {
-//                    if(unitPriceB < unitPriceC && !Double.isNaN(unitPriceB) && !Double.isNaN(unitPriceC)) {
-//                        if(unitPriceB != 0.0 && unitPriceB != Double.POSITIVE_INFINITY) {
-//                            frugalBuyOutput.setText("Buy Product B");
-//                        }
-//                    } else {
-//                        if(unitPriceC != 0.0 && unitPriceC != Double.POSITIVE_INFINITY) {
-//                            frugalBuyOutput.setText("Buy Product C");
-//                        }
-//                    }
-//                }
                 // call method to determine frugal buy
                 frugalBuyOutput.setText(findFrugalBuy(unitPriceA,unitPriceB,unitPriceC));
+
 
             } catch (NumberFormatException nfe) {
                 Log.i(DEBUG_TAG,"Incorrect Number Format for inputs provided by the user");
