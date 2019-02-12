@@ -257,7 +257,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="Enter Price B"
+                android:text="Enter Price C"
                 tools:layout_editor_absoluteX="42dp"
                 tools:layout_editor_absoluteY="81dp" />
 

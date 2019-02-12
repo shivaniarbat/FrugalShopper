@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.IOError;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -91,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
      * Returns Double value from string input. Converts input string number to Double.
      * @param strNumber     input String which will be converted
      * @return  Double      output message to be displayed to user
-     * @exception NumberFormatException
-     * @exception Exception
+     * @exception NumberFormatException catch the number format exception
+     * @exception Exception catch all other exceptions
      */
 
     double ParseDouble(String strNumber) {
@@ -114,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
      * Returns Integer value from the string input. Converts input string number to Integer.
      * @param strNumber     input String which will be converted
      * @return  Integer     output message to be displayed to user
-     * @exception NumberFormatException
-     * @exception Exception
+     * @exception NumberFormatException catch the number format exception
+     * @exception Exception catch all other exceptions
      */
 
     double ParseInt(String strNumber) {
@@ -146,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
      * @param priceB    double value to compare
      * @param priceC    double value to compare
      * @return String   returns output string to display to user
+     * @see String
      */
 
     String findFrugalBuy(double priceA, double priceB, double priceC) {
@@ -153,9 +155,13 @@ public class MainActivity extends AppCompatActivity {
         Double[] unitPrices = {priceA,priceB,priceC};
         double min = Double.MAX_VALUE;
         int flag = Integer.MAX_VALUE;
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.CEILING);
 
         for(int i=0;i<unitPrices.length;i++){
-            if(min > unitPrices[i] && unitPrices[i] != 0.0){
+            if(min >= unitPrices[i] && unitPrices[i] != 0.0){
+                /* round up the cents value */
+                unitPrices[i] = ParseDouble(df.format(unitPrices[i]));
                 min = unitPrices[i];
                 flag = i;
             }
@@ -190,10 +196,10 @@ public class MainActivity extends AppCompatActivity {
          *  prices to find out the minimum and display on top in the text view.
          * @param   v   View
          * @see     #findFrugalBuy(double, double, double)
-         * @exception ArithmeticException
-         * @exception NumberFormatException
-         * @exception IOError
-         * @exception Exception
+         * @exception ArithmeticException   arithmatic exception
+         * @exception NumberFormatException number format exception
+         * @exception IOError   input output exception
+         * @exception Exception all other exceptions
          */
         @Override
         public void onClick(View v) {
@@ -212,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
 
                     /* calculate unit prices for each item respectively */
                     try {
-                        unitPriceA = (getPriceA / ((getWtPoundA * 16) + getWtOzA));
+                        unitPriceA = getPriceA / ((getWtPoundA * 16) + getWtOzA);
                         if (Double.isNaN(unitPriceA) || Double.isInfinite(unitPriceA)) {
                             unitPriceA = 0.0;
                         }
